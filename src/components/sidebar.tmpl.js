@@ -3,8 +3,8 @@
 export const sidebar = `
 <aside class="sidebar">
       <div class="controls">
-        <button class='unfold-chats'></button>
-        <button class='settings'></button>
+        <button class="button menu-button">
+        <button class="button settings"></button>
       </div>
       <ul class="chat-list">
         <li class="chat-item chat-item_active">
@@ -35,6 +35,6 @@ export const sidebar = `
             <span class="last-message">Привет</span>
           </div>
         </li>
-        <button>Добавить чат</button>
       </ul>
+      <button class="add-chat">Добавить чат</button>
     </aside>`;

@@ -10,18 +10,14 @@ body {
   display: flex;
 }
 
-.header {
-  color: green;
-}
-
-.footer {
-  color: green;
-}
+/* sidebar component */
 
 .sidebar {
+  z-index: 2;
   background-color: #1C1E1F;
   min-width:  322px;
   height: 100vh;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
 }
 
 .chat-list {
@@ -34,7 +30,7 @@ body {
   border-radius: 100%;
   width: 44px;
   height: 44px;
-  margin: 0 12px;
+  margin-right: 12px;
 }
 
 .chat-name {
@@ -43,7 +39,10 @@ body {
 
 .chat-item {
   display: flex;
-  margin-bottom: 28px;
+  margin:0 18px 12px;
+  padding: 12px;
+  border-radius: 14px;
+  font-size: 14px;
 }
 
 .chat-item:hover {
@@ -52,4 +51,107 @@ body {
 
 .chat-item_active {
   background-color: #27292e;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 18px;
+}
+
+.button {
+  border-style: none;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  background-size: 100%; 
+}
+
+.menu-button { 
+  background: url('../assets/icons/icons8-back.png') 50% 50% no-repeat;
+  background-size: 100%; 
+}
+
+.settings { 
+  background: url('../assets/icons/icons8-settings.svg') 50% 50% no-repeat;
+  background-size: 100%; 
+}
+
+.add-chat {
+  border-style: none;
+  display: inline-block;
+  margin-left: 30px;
+  font-size: 18px;
+  color: white;
+  width: 200px;
+  height: 44px;
+  padding: 12px;
+  padding-left: 56px;
+  text-align: left;
+  box-sizing: content-box;
+  background: url('../assets/icons/icons8-add2.svg') 50% 50% no-repeat;
+  background-size: 44px;
+  background-position: left;
+}
+
+.add-chat:hover {
+  background-color: #27292ea8;
+}
+
+/* chat feed  component*/
+
+.chat-feed {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chat-header {
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 18px;
+  background-color: #161819;
+  box-shadow: #161819 -5px 10px 5px;
+}
+
+.chat-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.contact-about {
+  background: url('../assets/icons/icons8-about.png') 50% 50% no-repeat;
+  background-size: 100%; 
+}
+
+.messages {
+  overflow-y: scroll;
+  padding: 0;
+  margin: 0 auto;
+  width: 60%;
+  list-style: none;
+}
+
+.message {
+  background-color: #387AFF;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 0px 14px 14px 14px;
+  width: fit-content;
+}
+
+.message-input {
+  width: 60%;
+  background-color: #27292E;
+  border-style: none;
+  border-radius: 14px;
+  box-sizing: border-box;
+  padding: 12px;
+  margin: 12px auto 24px;
+  color: white;
 }
