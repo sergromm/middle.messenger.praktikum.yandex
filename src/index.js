@@ -8,6 +8,7 @@ const root = document.querySelector("#root");
 const routes = ['/messages', '/', '/404', '/settings', '/500', '/login', '/signup'];
 const locationPath = window.location.pathname; 
 
+
 if(!routes.includes(locationPath)) {
   window.location.pathname = '/404';
 }
@@ -18,7 +19,7 @@ if(locationPath === '/messages') {
 }
 
 if(locationPath === '/settings') {
-  
+
 }
 
 if(locationPath === '/404') {
