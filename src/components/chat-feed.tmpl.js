@@ -1,7 +1,7 @@
 export const chatFeed = `
 <section class="chat-feed">
   <header class="chat-header">
-    <span class="chat-title">Вася</span>
+    <a href="/500" class="chat-title">Вася</a>
     <button class="button contact-about"></button>
   </header> 
   <ul class="messages">
