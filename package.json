@@ -19,6 +19,7 @@
   "homepage": "https://github.com/sergromm/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
     "autoprefixer": "^10.4.2",
+    "express": "^4.17.2",
     "parcel": "^2.2.1",
     "postcss-custom-properties": "^12.1.4",
     "postcss-import": "^14.0.2"

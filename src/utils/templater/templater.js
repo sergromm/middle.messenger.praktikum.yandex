@@ -22,5 +22,5 @@ const compileTemplate = (template, data) => {
 };
 
 
-export const render = (root, template, data) =>
+export const render = (root, template, data = {}) =>
   (root.innerHTML += compileTemplate(template, data));
