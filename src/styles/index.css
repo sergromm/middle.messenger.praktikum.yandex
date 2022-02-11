@@ -8,6 +8,9 @@ body {
 
 #root {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 /* sidebar component */
@@ -165,4 +168,65 @@ body {
   padding: 12px;
   margin: 12px auto 24px;
   color: white;
+}
+
+/* login styles */
+
+.form {
+  max-width: 428px;
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px 48px;
+  border: none;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+}
+
+.form-title {
+  font-size: 24px;
+  margin-bottom: 48px;
+  padding: 0 4px;
+}
+
+.input {
+  background-color: #27292e;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  padding: 8px;
+  margin-bottom: 12px;
+}
+
+.form-button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  padding: 12px;
+  margin-top: 48px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.form-button:hover {
+  background-color: #ffffff25;
+}
+
+.form-text {
+  text-align: center;
+  font-size: 14px;
+}
+
+.form-link {
+  text-decoration: none;
+  transition: .3s;
+}
+
+.form-link:hover {
+  opacity: .7;
 }
