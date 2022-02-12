@@ -9,7 +9,7 @@ export const signup = `
       <input class="input"/>
       <button class="form-button">Зарегистрироваться</button>
       <p class="form-text">
-        Уже зарегистрированны?
+        Уже есть аккаунт?
         <a class="form-link" href="/signin">Войти</a>
       </p>
     </fieldset>

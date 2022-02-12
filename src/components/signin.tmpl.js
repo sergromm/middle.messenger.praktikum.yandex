@@ -8,7 +8,7 @@ export const signin = `
       <button class="form-button">Войти</button>
       <p class="form-text">
         Нет аккаунта?
-        <a class="form-link" href="/signup">Регистрация</a>
+        <a class="form-link" href="/signup">Зарегистрироваться</a>
       </p>
     </fieldset>
   </form>

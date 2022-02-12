@@ -3,15 +3,17 @@
 export const settings = `
     <aside class="sidebar">
       <div class="controls">
-        <button class="button menu-button">
+        <a href="/messages" class="button menu-button"></a>
       </div>
       <div class="profile">
         <img src='#' alt=' ' class="profile-avatar"/>
-        <h2 class="profile-name">Дима</h2>
-        <span class="profile-login">demon369</span>
+        <div class="profile-info">
+          <h2 class="profile-name">Дима</h2>
+          <span class="profile-login">@demon369</span>
+        </div>
       </div>
-      <button class="change-avatar">Изменить аватар</button>
-      <button class="edit-profile">Редактировать профиль</button>
-      <button class="change-password">Изменить пароль</button>
-      <button class="logout">Выйти</button>
+      <button class="settings-button change-avatar">Изменить аватар</button>
+      <button class="settings-button edit-profile">Редактировать профиль</button>
+      <button class="settings-button change-password">Изменить пароль</button>
+      <a href="/signin" class="settings-button logout">Выйти</a>
     </aside>`;
