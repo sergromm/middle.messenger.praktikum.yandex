@@ -86,5 +86,5 @@ export const chatFeed = `
     <li class="message">Привет</li>
     <li class="message">Привет</li>
   </ul>
-  <input class="message-input" placeholder="Введите сообщение" type="text"/>
+  <input class="message-input" placeholder="Введите сообщение" type="text" name="message"/>
 </section>`;

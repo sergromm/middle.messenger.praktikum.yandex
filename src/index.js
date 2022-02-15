@@ -6,9 +6,10 @@ import { fallbackPage } from './components/fallbackPage.tmpl';
 import { settings } from './components/settings.tmpl';
 import { signup } from './components/signup.tmpl';
 import { signin } from './components/signin.tmpl';
+import { editProfile } from './components/editProfile.tmpl';
 
 const root = document.querySelector('#root');
-const routes = ['/messages', '/', '/404', '/settings', '/500', '/login', '/signup', '/signin'];
+const routes = ['/messages', '/', '/404', '/settings', '/edit-profile', '/500', '/login', '/signup', '/signin'];
 const locationPath = window.location.pathname; 
 
 if(!routes.includes(locationPath)) {
@@ -29,6 +30,11 @@ switch(locationPath) {
   case '/settings': 
     render(root, settings);
     render(root, chatFeed);
+    break;
+  case '/edit-profile':
+    render(root, settings);
+    render(root, chatFeed);
+    render(root, editProfile);
     break;
   case '/404':
     render(root, fallbackPage, {
