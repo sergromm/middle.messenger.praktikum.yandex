@@ -23,10 +23,18 @@ if(locationPath === '/') {
 
 switch(locationPath) {
   case '/signup':
-    render(root, signup);
+    render(root, signup, {
+      handleSignup: () => {
+        setLocation('/messages')
+      }
+    });
     break;
   case '/signin':
-    render(root, signin);
+    render(root, signin, {
+      handleSignin: () => {
+        setLocation('/messages')
+      }
+    });
     break;
   case '/messages':
     render(root, sidebar, {
