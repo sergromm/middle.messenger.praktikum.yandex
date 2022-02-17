@@ -12,9 +12,9 @@ export const settings = `
         <span class="profile-login">@demon369</span>
       </div>
     </div>
-    <button class="settings-button change-avatar">Изменить аватар</button>
+    <button class="settings-button change-avatar" onclick="{{openEditAvatar}}">Изменить аватар</button>
     <button class="settings-button edit-profile" onclick="{{openEditProfile}}">Редактировать профиль</button>
-    <button class="settings-button change-password">Изменить пароль</button>
+    <button class="settings-button change-password" onclick="{{openChangePassword}}">Изменить пароль</button>
     <button class="settings-button logout" onclick="{{handleLogout}}">Выйти</button>
   </aside>
 `;

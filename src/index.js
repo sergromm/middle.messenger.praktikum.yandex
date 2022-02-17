@@ -1,15 +1,29 @@
 import './styles/index.css';
 import { render } from './utils/templater/templater';
 import { sidebar } from './components/sidebar.tmpl';
-import { chatFeed } from './components/chat-feed.tmpl';
+import { chatFeed } from './components/chatFeed.tmpl';
 import { fallbackPage } from './components/fallbackPage.tmpl'; 
 import { settings } from './components/settings.tmpl';
 import { signup } from './components/signup.tmpl';
 import { signin } from './components/signin.tmpl';
 import { editProfile } from './components/editProfile.tmpl';
+import { changePassword } from './components/changePassword.tmpl';
+import { editAvatar } from './components/editAvatar.tmpl';
 
+const routes = [
+  '/messages',
+  '/',
+  '/404',
+  '/settings',
+  '/edit-profile', 
+  '/500', 
+  '/login', 
+  '/signup', 
+  '/signin', 
+  '/change-password',
+  '/edit-avatar'
+];
 const root = document.querySelector('#root');
-const routes = ['/messages', '/', '/404', '/settings', '/edit-profile', '/500', '/login', '/signup', '/signin'];
 const locationPath = window.location.pathname;
 const setLocation = (path) => window.location.pathname = path;
 
@@ -52,6 +66,12 @@ switch(locationPath) {
       openEditProfile: () => {
         setLocation('/edit-profile')
       },
+      openChangePassword: () => {
+        setLocation('/change-password')
+      },
+      openEditAvatar: () => {
+        setLocation('/edit-avatar')
+      },
       handleLogout: () => {
         setLocation('/signin')
       },
@@ -59,15 +79,37 @@ switch(locationPath) {
     });
     render(root, chatFeed);
     break;
+  case '/edit-avatar':
+    render(root, settings);
+    render(root, chatFeed);
+    render(root, editAvatar, {
+      handleClosePopup: () => {
+        history.back();
+      }
+    });
+    break;
   case '/edit-profile':
     render(root, settings);
     render(root, chatFeed);
-    render(root, editProfile);
+    render(root, editProfile, {
+      handleClosePopup: () => {
+        history.back();
+      }
+    });
+    break;
+  case '/change-password':
+    render(root, settings);
+    render(root, chatFeed);
+    render(root, changePassword, {
+      handleClosePopup: () => {
+        history.back();
+      }
+    });
     break;
   case '/404':
     render(root, fallbackPage, {
       title: '404', 
-      text: 'Упс, похоже такой страницы не существует'
+      text: 'Упс, похоже такой страницы не существует.'
     });
     break;
   case '/500':
