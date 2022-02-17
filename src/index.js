@@ -10,10 +10,15 @@ import { editProfile } from './components/editProfile.tmpl';
 
 const root = document.querySelector('#root');
 const routes = ['/messages', '/', '/404', '/settings', '/edit-profile', '/500', '/login', '/signup', '/signin'];
-const locationPath = window.location.pathname; 
+const locationPath = window.location.pathname;
+const setLocation = (path) => window.location.pathname = path;
 
 if(!routes.includes(locationPath)) {
-  window.location.pathname = '/404';
+  setLocation('/404');
+}
+
+if(locationPath === '/') {
+  setLocation('/signin')
 }
 
 switch(locationPath) {
@@ -24,11 +29,26 @@ switch(locationPath) {
     render(root, signin);
     break;
   case '/messages':
-    render(root, sidebar);
+    render(root, sidebar, {
+      moveToSettings: () => {
+        setLocation('/settings')
+      },
+    });
     render(root, chatFeed);
     break;
   case '/settings': 
-    render(root, settings);
+    render(root, settings, { 
+      moveToMessages: () => {
+        setLocation('/messages')
+      },
+      openEditProfile: () => {
+        setLocation('/edit-profile')
+      },
+      handleLogout: () => {
+        setLocation('/signin')
+      },
+      name: 'Дима'
+    });
     render(root, chatFeed);
     break;
   case '/edit-profile':

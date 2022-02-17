@@ -4,7 +4,7 @@ export const sidebar = `
     <aside class="sidebar">
       <div class="controls">
         <button class="button menu-button"></button>
-        <a href="/settings" class="button settings"></a>
+        <button class="button settings" onclick="{{moveToSettings}}"></a>
       </div>
       <ul class="chat-list">
         <li class="chat-item chat-item_active">

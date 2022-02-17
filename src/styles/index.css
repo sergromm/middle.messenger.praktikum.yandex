@@ -321,6 +321,7 @@ body {
   width: fit-content;
   transition: 0.3s;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .popup-close:hover {

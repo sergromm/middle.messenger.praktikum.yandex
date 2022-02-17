@@ -1,7 +1,7 @@
 export const editProfile =`
 <div class="popup edit-profile-popup">
   <form class="form edit-profile-form">
-  <button class="popup-close">&times;</button>
+  <a href="/settings" class="popup-close">&times;</a>
     <fieldset class="form-container">
       <legend class="form-title">Редактировать профиль</legend>
       <label class="input-title">
