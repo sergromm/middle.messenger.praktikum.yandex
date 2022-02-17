@@ -4,7 +4,7 @@
   "description": "---",
   "scripts": {
     "serve": "parcel src/index.html --no-cache",
-    "dev": "node ./app.js",
+    "start": "node ./app.js",
     "build": "parcel build src/index.html"
   },
   "repository": {
