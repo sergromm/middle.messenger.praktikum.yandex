@@ -1,4 +1,4 @@
-export const changePassword = `
+const changePassword = `
 <div class="popup edit-profile-popup">
   <form class="form edit-profile-form">
   <button class="popup-close" onclick="{{handleClosePopup}}">&times;</button>
@@ -17,3 +17,5 @@ export const changePassword = `
   </form>
 </div>
 `;
+
+export default changePassword;

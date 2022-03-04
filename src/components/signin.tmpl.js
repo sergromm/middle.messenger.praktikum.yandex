@@ -1,5 +1,4 @@
-export const signin = `
-  
+const signin = `
   <form class="form signin-form">
     <fieldset class="form-container">
       <legend class="form-title">Войти</legend>
@@ -13,3 +12,5 @@ export const signin = `
     </fieldset>
   </form>
 `;
+
+export default signin;

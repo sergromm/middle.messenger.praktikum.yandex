@@ -1,4 +1,4 @@
-export const editProfile =`
+const editProfile = `
 <div class="popup edit-profile-popup">
   <form class="form edit-profile-form">
   <a href="/settings" class="popup-close">&times;</a>
@@ -33,3 +33,5 @@ export const editProfile =`
   </form>
 </div>
 `;
+
+export default editProfile;

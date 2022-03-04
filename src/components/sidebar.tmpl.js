@@ -1,6 +1,6 @@
 // TODO: вернуть альт для изображений, когда добавлю ссылки на аватары
 
-export const sidebar = `
+const sidebar = `
     <aside class="sidebar">
       <div class="controls">
         <button class="button menu-button"></button>
@@ -38,3 +38,5 @@ export const sidebar = `
       </ul>
       <button class="add-chat">Добавить чат</button>
     </aside>`;
+
+export default sidebar;

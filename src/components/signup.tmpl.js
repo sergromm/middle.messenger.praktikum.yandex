@@ -1,4 +1,4 @@
-export const signup = `
+const signup = `
   <form class="form signup-form">
     <fieldset class="form-container">
       <legend class="form-title">Регистрация</legend>
@@ -16,3 +16,5 @@ export const signup = `
     </fieldset>
   </form>
 `;
+
+export default signup;

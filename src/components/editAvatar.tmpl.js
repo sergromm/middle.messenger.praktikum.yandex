@@ -1,4 +1,4 @@
-export const editAvatar = `
+const editAvatar = `
 <div class="popup edit-profile-popup">
   <form class="form edit-profile-form">
   <button class="popup-close" onclick="{{handleClosePopup}}">&times;</button>
@@ -12,3 +12,5 @@ export const editAvatar = `
   </form>
 </div>
 `;
+
+export default editAvatar;

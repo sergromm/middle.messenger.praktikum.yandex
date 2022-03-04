@@ -1,6 +1,6 @@
 // TODO: вернуть альт для изображений, когда добавлю ссылки на аватары
 
-export const settings = `
+const settings = `
   <aside class="sidebar">
     <div class="controls">
       <button onclick="{{moveToMessages}}" class="button menu-button"></button>
@@ -18,3 +18,5 @@ export const settings = `
     <button class="settings-button logout" onclick="{{handleLogout}}">Выйти</button>
   </aside>
 `;
+
+export default settings;
