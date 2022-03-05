@@ -1,8 +1,11 @@
-/* eslint-disable max-classes-per-file */
-/* eslint-disable import/extensions */
 /* eslint-disable no-restricted-globals */
-// удалить отключение позже
+import chatPage from "./pages/ChatPage";
 import "./styles/index.css";
+import { notFound, serverDown } from "./pages/Fallback";
+import signup from "./pages/Signup";
+import signin from "./pages/Signin";
+import popup from "./components/Popup/Popup";
+import input from "./components/Input/Input";
 // import { render } from "./utils/templater/templater";
 // import sidebar from "./components/sidebar.tmpl";
 // import chatFeed from "./components/chatFeed.tmpl";
@@ -13,8 +16,7 @@ import "./styles/index.css";
 // import editProfile from "./components/editProfile.tmpl";
 // import changePassword from "./components/changePassword.tmpl";
 // import editAvatar from "./components/editAvatar.tmpl";
-import Block from "./utils/templater/constructor/Block";
-
+// import Block from "./utils/templater/constructor/Block";
 const routes = [
   "/messages",
   "/",
@@ -32,62 +34,11 @@ const routes = [
 // const root: HTMLElement | null = document.querySelector("#root");
 const locationPath = window.location.pathname;
 
-type ButtonProps = {
-  text: string;
-  settings: undefined;
-};
-
-const buttonTemplate = `<button>{{text}}</button>`;
-
-class Button extends Block<ButtonProps> {
-  render() {
-    return this.compile(buttonTemplate, { ...this.props });
-  }
-}
-
-const button = new Button({
-  text: "Change name",
-});
-
-interface PageProps {
-  button: HTMLElement;
-}
-
-class ChatPage extends Block<PageProps> {
-  render() {
-    return this.compile(
-      `<section class="chat-feed"> 
-        {{button}}
-        [[@list-of ${buttonTemplate} from buttons]]
-      </section>`,
-      { ...this.props }
-    );
-  }
-}
-
-const chatPage = new ChatPage({
-  button,
-  buttons: [{ text: "hey" }, { text: "hello" }, { text: "hi" }, { text: "es" }],
-});
-
-setTimeout(() => {
-  button.setProps({
-    text: "boo",
-  });
-}, 1000);
-
 function renderDOM(query, block) {
   const target = document.querySelector(query);
   target.appendChild(block.getContent());
   return target;
 }
-
-// const test = new Test({
-//   text: "button",
-//   settings: {
-//     withIternalId: true,
-//   },
-// });
 
 function setLocation(path) {
   window.location.pathname = path;
@@ -101,33 +52,26 @@ if (locationPath === "/") {
   setLocation("/signin");
 }
 
+function render(target) {
+  return (block) => renderDOM(target, block);
+}
+
+const renderPage = render("#root");
+
 switch (locationPath) {
-  case "/test":
-    renderDOM("#root", chatPage);
+  // case "/test":
+  //   renderPage(page);
+  //   break;
+  case "/messages":
+    renderPage(chatPage);
     break;
-  // case "/signup":
-  //   render(root, signup, {
-  //     handleSignup: () => {
-  //       setLocation("/messages");
-  //     },
-  //   });
-  //   break;
-  // case "/signin":
-  //   render(root, signin, {
-  //     handleSignin: () => {
-  //       setLocation("/messages");
-  //     },
-  //   });
-  //   break;
-  // case "/messages":
-  //   render(root, sidebar, {
-  //     moveToSettings: () => {
-  //       setLocation("/settings");
-  //     },
-  //   });
-  //   // render(root, chatFeed);
-  //   break;
-  // case "/settings":
+  case "/signup":
+    renderPage(signup);
+    break;
+  case "/signin":
+    renderPage(signin);
+    break;
+  // // case "/settings":
   //   render(root, settings, {
   //     moveToMessages: () => {
   //       setLocation("/messages");
@@ -150,7 +94,7 @@ switch (locationPath) {
   //   break;
   // case "/edit-avatar":
   //   render(root, settings);
-  //   // render(root, chatFeed);
+  //   render(root, chatFeed);
   //   render(root, editAvatar, {
   //     handleClosePopup: () => {
   //       history.back();
@@ -165,27 +109,15 @@ switch (locationPath) {
   //       history.back();
   //     },
   //   });
-  //   break;
+  // break;
   // case "/change-password":
-  //   render(root, settings);
-  //   // render(root, chatFeed);
-  //   render(root, changePassword, {
-  //     handleClosePopup: () => {
-  //       history.back();
-  //     },
-  //   });
+  //   renderPage(popup);
   //   break;
   // case "/404":
-  //   render(root, fallbackPage, {
-  //     title: "404",
-  //     text: "Упс, похоже такой страницы не существует.",
-  //   });
+  //   renderPage(notFound);
   //   break;
   // case "/500":
-  //   render(root, fallbackPage, {
-  //     title: "500",
-  //     text: "Упс, серверу поплохело. Сейчас восстановим.",
-  //   });
+  //   renderPage(serverDown);
   //   break;
   default:
     break;

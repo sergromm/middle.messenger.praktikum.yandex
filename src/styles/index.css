@@ -13,6 +13,13 @@ body {
   height: 100vh;
 }
 
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 /* sidebar component */
 
 .sidebar {
@@ -50,6 +57,7 @@ body {
   border-radius: 14px;
   font-size: 14px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .chat-item:hover {
@@ -266,6 +274,7 @@ body {
 }
 
 .input {
+  outline: none;
   background-color: #27292e;
   color: white;
   border: 2px solid rgb(255 255 255 / 25%);
@@ -273,10 +282,23 @@ body {
   padding: 12px;
   margin-bottom: 12px;
   font-size: 16px;
+  transition: 0.3s;
 }
 
-.input:invalid {
-  border-color: red;
+.input:not(:focus):valid {
+  border-color: none;
+}
+
+.input:not(:focus):invalid {
+  border-color: none;
+}
+
+.input:focus:invalid {
+  border-color: firebrick;
+}
+
+.input:focus:valid {
+  border-color: seagreen;
 }
 
 .form-button {

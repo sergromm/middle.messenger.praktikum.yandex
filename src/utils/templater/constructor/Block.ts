@@ -129,13 +129,11 @@ class Block<PropsT = any> {
     const fragment = this._createDocumentElement(
       "template"
     ) as HTMLTemplateElement;
-
     Object.entries(this.children).forEach(([key, child]) => {
-      console.log(child);
       propsAndStubs[key] = `<div data-id="id-${child._id}"></div>`;
     });
 
-    const htmlString = compiler(template, propsAndStubs);
+    const htmlString = compiler(template.trim(), propsAndStubs);
     fragment.innerHTML = htmlString;
 
     Object.values(this.children).forEach((child) => {
@@ -155,11 +153,15 @@ class Block<PropsT = any> {
 
   _render() {
     const fragment = this.render();
+    if (this._element) {
+      this._removeEvents();
+    }
     const newElement = fragment.firstChild as HTMLElement;
     if (this._element) {
       this._element.replaceWith(newElement);
     }
     this._element = newElement;
+    this._addEvents();
   }
 
   render(): DocumentFragment {
@@ -172,6 +174,29 @@ class Block<PropsT = any> {
 
   getProps() {
     return this.props;
+  }
+
+  _addEvents() {
+    const { events }: Record<string, () => void> = this.props as any;
+
+    if (!events) {
+      return;
+    }
+
+    Object.entries(events).forEach(([event, listener]) => {
+      this._element!.addEventListener(event, listener);
+    });
+  }
+
+  _removeEvents() {
+    const { events }: Record<string, () => void> = this.props as any;
+
+    if (!events) {
+      return;
+    }
+    Object.entries(events).forEach(([event, listener]) => {
+      this._element!.removeEventListener(event, listener);
+    });
   }
 
   _createDocumentElement(tagName) {
