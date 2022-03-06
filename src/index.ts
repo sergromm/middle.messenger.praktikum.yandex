@@ -1,11 +1,10 @@
 /* eslint-disable no-restricted-globals */
-import chatPage from "./pages/ChatPage";
 import "./styles/index.css";
+import chatPage from "./pages/ChatPage";
 import { notFound, serverDown } from "./pages/Fallback";
 import signup from "./pages/Signup";
 import signin from "./pages/Signin";
-import popup from "./components/Popup/Popup";
-import input from "./components/Input/Input";
+import settingsPage from "./pages/SettingsPage";
 // import { render } from "./utils/templater/templater";
 // import sidebar from "./components/sidebar.tmpl";
 // import chatFeed from "./components/chatFeed.tmpl";
@@ -59,9 +58,6 @@ function render(target) {
 const renderPage = render("#root");
 
 switch (locationPath) {
-  // case "/test":
-  //   renderPage(page);
-  //   break;
   case "/messages":
     renderPage(chatPage);
     break;
@@ -71,27 +67,9 @@ switch (locationPath) {
   case "/signin":
     renderPage(signin);
     break;
-  // // case "/settings":
-  //   render(root, settings, {
-  //     moveToMessages: () => {
-  //       setLocation("/messages");
-  //     },
-  //     openEditProfile: () => {
-  //       setLocation("/edit-profile");
-  //     },
-  //     openChangePassword: () => {
-  //       setLocation("/change-password");
-  //     },
-  //     openEditAvatar: () => {
-  //       setLocation("/edit-avatar");
-  //     },
-  //     handleLogout: () => {
-  //       setLocation("/signin");
-  //     },
-  //     name: "Дима",
-  //   });
-  //   // render(root, chatFeed);
-  //   break;
+  case "/settings":
+    renderPage(settingsPage);
+    break;
   // case "/edit-avatar":
   //   render(root, settings);
   //   render(root, chatFeed);
@@ -113,12 +91,12 @@ switch (locationPath) {
   // case "/change-password":
   //   renderPage(popup);
   //   break;
-  // case "/404":
-  //   renderPage(notFound);
-  //   break;
-  // case "/500":
-  //   renderPage(serverDown);
-  //   break;
+  case "/404":
+    renderPage(notFound);
+    break;
+  case "/500":
+    renderPage(serverDown);
+    break;
   default:
     break;
 }

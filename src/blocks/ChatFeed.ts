@@ -1,22 +1,17 @@
-import chatHeader from "../components/ChatHeader/ChatHeader";
-import messageInput from "../components/MessagesInput/MessageInput";
-import messages from "../components/Messages/Messages";
 import Block from "../utils/templater/constructor/Block";
+
+const chatFeedTemplate = `<section class="chat-feed">
+  {{chatHeader}}
+  {{messages}}
+  {{messageInput}}
+</section>`;
 
 class ChatFeed extends Block {
   render() {
-    return this.compile(
-      `<section class="chat-feed">
-        {{chatHeader}}
-        {{messages}}
-        {{messageInput}}
-      </section>`,
-      {
-        ...this.props,
-      }
-    );
+    return this.compile(chatFeedTemplate, {
+      ...this.props,
+    });
   }
 }
 
-const chatFeed = new ChatFeed({ chatHeader, messages, messageInput });
-export default chatFeed;
+export default ChatFeed;

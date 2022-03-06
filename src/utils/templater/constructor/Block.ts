@@ -31,12 +31,14 @@ class Block<PropsT = any> {
 
   public children: object;
 
-  constructor(propsAndChildren: any = {}) {
+  constructor(propsAndChildren: any = { withEternalId: true }) {
     const { children, props } = this._getChildren(propsAndChildren);
     const eventBus = new EventBus();
     this._meta = { props };
     this.children = children;
-    this._id = nanoid();
+    if (propsAndChildren.withEternalId) {
+      this._id = nanoid();
+    }
     this.props = this._makePropsProxy({ ...props, __id: this._id });
     this.eventBus = () => eventBus;
     this.compiler = compiler;
@@ -70,7 +72,6 @@ class Block<PropsT = any> {
 
   _componentDidMount() {
     this.componentDidMount();
-
     Object.values(this.children).forEach((child) => {
       child.dispatchComponentDidMount();
     });
@@ -79,7 +80,7 @@ class Block<PropsT = any> {
   // eslint-disable-next-line no-unused-vars
   componentDidMount(oldProps = {}) {}
 
-  dispatchComponentDidMoun() {
+  dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
@@ -134,6 +135,7 @@ class Block<PropsT = any> {
     });
 
     const htmlString = compiler(template.trim(), propsAndStubs);
+
     fragment.innerHTML = htmlString;
 
     Object.values(this.children).forEach((child) => {

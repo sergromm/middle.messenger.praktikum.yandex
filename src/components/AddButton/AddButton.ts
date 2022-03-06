@@ -8,6 +8,6 @@ class AddButton extends Block {
   }
 }
 
-const addButton = new AddButton({ name: "Вася" });
+const addButton = new AddButton({});
 
 export default addButton;

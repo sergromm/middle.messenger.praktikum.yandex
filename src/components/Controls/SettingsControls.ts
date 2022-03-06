@@ -4,10 +4,10 @@ import Button from "../Button/Button";
 const controlsTemplate = /* template */ `
   <div class="controls">
     {{menuButton}}
-    {{settingsButton}}
   </div>
 `;
-class Controls extends Block {
+
+class SettingsControls extends Block {
   render() {
     return this.compile(controlsTemplate, {
       ...this.props,
@@ -19,8 +19,7 @@ function setLocation(path) {
   window.location.pathname = path;
 }
 
-const handleMenuClick = () => setLocation("/signin");
-const handleSettingsClick = () => setLocation("/settings");
+const handleMenuClick = () => setLocation("/messages");
 
 const menuButton = new Button({
   text: "",
@@ -30,17 +29,8 @@ const menuButton = new Button({
   },
 });
 
-const settingsButton = new Button({
-  text: "",
-  className: ["button", "settings"],
-  events: {
-    click: handleSettingsClick,
-  },
-});
-
-const controls = new Controls({
+const settingsControls = new SettingsControls({
   menuButton,
-  settingsButton,
 });
 
-export default controls;
+export default settingsControls;

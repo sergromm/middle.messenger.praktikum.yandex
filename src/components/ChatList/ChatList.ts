@@ -1,4 +1,5 @@
 import Block from "../../utils/templater/constructor/Block";
+import addButton from "../AddButton/AddButton";
 
 const chatListTemplate = `<ul class="chat-list">
 <li class="chat-item chat-item_active">
@@ -29,6 +30,7 @@ const chatListTemplate = `<ul class="chat-list">
     <span class="last-message">Привет</span>
   </div>
 </li>
+{{addButton}}
 </ul>`;
 
 class ChatList extends Block {
@@ -37,6 +39,6 @@ class ChatList extends Block {
   }
 }
 
-const chatList = new ChatList({ name: "Вася" });
+const chatList = new ChatList({ name: "Вася", addButton });
 
 export default chatList;

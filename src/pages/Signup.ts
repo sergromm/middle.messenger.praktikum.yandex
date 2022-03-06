@@ -1,5 +1,6 @@
 import Block from "../utils/templater/constructor/Block";
 import Input from "../components/Input/Input";
+import setLocation from "../utils/templater/helpers";
 
 const signupTemplate = `
 <form class="form signup-form">
@@ -61,11 +62,18 @@ const passwordInput = new Input({
 
 passwordInput.setAttribute("minlength", "3");
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  const inputs = [...e.target.querySelectorAll(".input")];
-  const formData = inputs.map(({ name, value }) => ({ [name]: value }));
-  console.dir(formData);
+const handleSubmit = (event) => {
+  event.preventDefault();
+  if (event.target) {
+    const { target } = event;
+    const inputs = target.querySelectorAll(".input");
+    const inputsArray = [...inputs];
+    const formData = inputsArray.map(({ name, value }) => ({ [name]: value }));
+    console.dir(formData);
+    setTimeout(() => {
+      setLocation("/messages");
+    }, 3000);
+  }
 };
 
 const signup = new Signup({

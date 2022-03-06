@@ -16,11 +16,6 @@ const messages = new Messages({
   ],
 });
 
-// messagesData.push({
-//   name: "Вася",
-//   text: "Привет",
-// });
-
 setTimeout(() => {
   messages.setProps({
     messages: [

@@ -1,5 +1,6 @@
 import Block from "../utils/templater/constructor/Block";
 import Input from "../components/Input/Input";
+import setLocation from "../utils/templater/helpers";
 
 const signinTemplate = /* template */ `
 <form class="form signin-form">
@@ -40,11 +41,18 @@ const passwordInput = new Input({
   name: "password",
 });
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  const inputs = [...e.target.querySelectorAll(".input")];
-  const formData = inputs.map(({ name, value }) => ({ [name]: value }));
-  console.dir(formData);
+const handleSubmit = (event) => {
+  event.preventDefault();
+  if (event.target) {
+    const { target } = event;
+    const inputs = target.querySelectorAll(".input");
+    const inputsArray = [...inputs];
+    const formData = inputsArray.map(({ name, value }) => ({ [name]: value }));
+    console.dir(formData);
+    setTimeout(() => {
+      setLocation("/messages");
+    }, 3000);
+  }
 };
 
 const signin = new Signin({
