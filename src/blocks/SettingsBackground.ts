@@ -8,7 +8,7 @@ const settingsBackgroundTemplate = /* template */ `
     <button class="button contact-about"></button>
   </header>
   <ul class="messages">
-    [[@list-of <li class="message">{{text}}</li> from messages]]
+    <li class="message">Привет</li>
   </ul>
   <input class="message-input" placeholder="Введите сообщение" type="text" name="message"/>
 </section>`;

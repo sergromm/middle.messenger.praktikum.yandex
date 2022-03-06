@@ -19,9 +19,11 @@ const generateList = (keys, data) => {
   const list = get(data, listName);
   const listData = list.reduce((acc, item) => {
     const dataKeys = child.match(isDoubleBraces).map(getDataKey);
+    let childCopy = child;
     dataKeys.forEach((dataKey) => {
-      acc += child.replace(isDoubleBraces, item[dataKey]);
+      childCopy = childCopy.replace(`{{${dataKey}}}`, item[dataKey]);
     });
+    acc += childCopy;
     return acc;
   }, "");
 
@@ -33,7 +35,6 @@ const compileTemplate = (template: string, data: object) => {
   // eslint-disable-next-line no-cond-assign
   while ((key = isDoubleBraces.exec(template))) {
     if (key[1]) {
-      key[1].match(parseListArguments); // WTF??????
       const templateValue = normalizePropName(key[1]);
       const synthaxKeys = isSyntax.exec(template);
       if (synthaxKeys) {

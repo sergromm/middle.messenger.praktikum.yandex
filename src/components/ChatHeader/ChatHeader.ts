@@ -1,5 +1,9 @@
 import Block from "../../utils/templater/constructor/Block";
-import chatHeaderTemplate from "./ChatHeader.tmpl";
+
+const chatHeaderTemplate = `<header class="chat-header">
+<a href="/500" class="chat-title">{{name}}</a>
+<button class="button contact-about"></button>
+</header>`;
 
 class ChatHeader extends Block {
   render() {

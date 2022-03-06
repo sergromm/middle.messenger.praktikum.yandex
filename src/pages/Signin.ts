@@ -1,6 +1,8 @@
 import Block from "../utils/templater/constructor/Block";
 import Input from "../components/Input/Input";
-import setLocation from "../utils/templater/helpers";
+import setLocation, {
+  formValidationPatterns,
+} from "../utils/templater/helpers";
 
 const signinTemplate = /* template */ `
 <form class="form signin-form">
@@ -30,15 +32,17 @@ const loginInput = new Input({
   type: "input",
   className: ["input", "sigin-login"],
   name: "login",
+  pattern: formValidationPatterns.login,
 });
 
 loginInput.setAttribute("minlength", "4");
 
 const passwordInput = new Input({
   placeholder: "Пароль",
-  type: "input",
+  type: "password",
   className: ["input", "sigin-password"],
   name: "password",
+  pattern: formValidationPatterns.password,
 });
 
 const handleSubmit = (event) => {

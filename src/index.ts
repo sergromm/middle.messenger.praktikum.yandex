@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import "./styles/index.css";
-import chatPage from "./pages/ChatPage";
+import { chatPage } from "./pages/ChatPage";
 import { notFound, serverDown } from "./pages/Fallback";
 import signup from "./pages/Signup";
 import signin from "./pages/Signin";

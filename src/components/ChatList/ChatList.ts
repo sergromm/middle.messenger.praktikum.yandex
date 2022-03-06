@@ -1,35 +1,17 @@
 import Block from "../../utils/templater/constructor/Block";
 import addButton from "../AddButton/AddButton";
 
-const chatListTemplate = `<ul class="chat-list">
+const chatItemTemplate = /* template */ `
 <li class="chat-item chat-item_active">
   <img class="chat-avatar" src="#" alt=" "/>
   <div class="chat=content">
-    <h2 class="chat-name">Вася</h2>
-    <span class="last-message">Привет</span>
+    <h2 class="chat-name">{{name}}</h2>
+    <span class="last-message">{{lastMessage}}</span>
   </div>
-</li>
-<li class="chat-item">
-  <img class="chat-avatar" src="#" alt=" "/>
-  <div class="chat=content">
-    <h2 class="chat-name">Вася</h2>
-    <span class="last-message">Привет</span>
-  </div>
-</li>
-<li class="chat-item">
-  <img class="chat-avatar" src="#" alt=" "/>
-  <div class="chat=content">
-    <h2 class="chat-name">Вася</h2>
-    <span class="last-message">Привет</span>
-  </div>
-</li>
-<li class="chat-item">
-  <img class="chat-avatar" src="#" alt=" "/>
-  <div class="chat=content">
-    <h2 class="chat-name">Вася</h2>
-    <span class="last-message">Привет</span>
-  </div>
-</li>
+</li>`;
+
+const chatListTemplate = `<ul class="chat-list">
+[[@list-of ${chatItemTemplate.replace(/\r?\n|\r/g, "")} from chats]]
 {{addButton}}
 </ul>`;
 
@@ -39,6 +21,22 @@ class ChatList extends Block {
   }
 }
 
-const chatList = new ChatList({ name: "Вася", addButton });
+const chatList = new ChatList({
+  chats: [
+    {
+      name: "Вася",
+      lastMessage: "Пока",
+      avatar: "#",
+      imageAlt: " ",
+    },
+    {
+      name: "Вася",
+      lastMessage: "Привет",
+      avatar: "#",
+      imageAlt: " ",
+    },
+  ],
+  addButton,
+});
 
 export default chatList;

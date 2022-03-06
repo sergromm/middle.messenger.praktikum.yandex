@@ -23,4 +23,4 @@ const chatFeed = new ChatFeed({ chatHeader, messages, messageInput });
 
 const chatPage = new ChatPage({ sidebar, chatFeed });
 
-export default chatPage;
+export { chatFeed, chatPage };

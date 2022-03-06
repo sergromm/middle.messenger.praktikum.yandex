@@ -1,5 +1,6 @@
 import Block from "../../utils/templater/constructor/Block";
-import messageInputTemplate from "./MessageInput.tmpl";
+
+const messageInputTemplate = `<input class="message-input" placeholder="Введите сообщение" type="text" name="message"/>`;
 
 class MessageInput extends Block {
   render() {
