@@ -5,17 +5,9 @@ import { notFound, serverDown } from "./pages/Fallback";
 import signup from "./pages/Signup";
 import signin from "./pages/Signin";
 import settingsPage from "./pages/SettingsPage";
-// import { render } from "./utils/templater/templater";
-// import sidebar from "./components/sidebar.tmpl";
-// import chatFeed from "./components/chatFeed.tmpl";
-// import fallbackPage from "./components/fallbackPage.tmpl";
-// import settings from "./components/settings.tmpl";
-// import signup from "./components/signup.tmpl";
-// import signin from "./components/signin.tmpl";
-// import editProfile from "./components/editProfile.tmpl";
-// import changePassword from "./components/changePassword.tmpl";
-// import editAvatar from "./components/editAvatar.tmpl";
-// import Block from "./utils/templater/constructor/Block";
+import setLocation, { validatorSelectors } from "./utils/templater/helpers";
+import FormValidator from "./utils/Validator";
+
 const routes = [
   "/messages",
   "/",
@@ -30,17 +22,12 @@ const routes = [
   "/edit-avatar",
   "/test",
 ];
-// const root: HTMLElement | null = document.querySelector("#root");
 const locationPath = window.location.pathname;
 
 function renderDOM(query, block) {
   const target = document.querySelector(query);
   target.appendChild(block.getContent());
   return target;
-}
-
-function setLocation(path) {
-  window.location.pathname = path;
 }
 
 if (!routes.includes(locationPath)) {
@@ -70,27 +57,6 @@ switch (locationPath) {
   case "/settings":
     renderPage(settingsPage);
     break;
-  // case "/edit-avatar":
-  //   render(root, settings);
-  //   render(root, chatFeed);
-  //   render(root, editAvatar, {
-  //     handleClosePopup: () => {
-  //       history.back();
-  //     },
-  //   });
-  //   break;
-  // case "/edit-profile":
-  //   render(root, settings);
-  //   // render(root, chatFeed);
-  //   render(root, editProfile, {
-  //     handleClosePopup: () => {
-  //       history.back();
-  //     },
-  //   });
-  // break;
-  // case "/change-password":
-  //   renderPage(popup);
-  //   break;
   case "/404":
     renderPage(notFound);
     break;
@@ -99,4 +65,35 @@ switch (locationPath) {
     break;
   default:
     break;
+}
+
+const validator = (selectors) => (form) => new FormValidator(selectors, form);
+const formValidator = validator(validatorSelectors);
+const signinForm = document.querySelector(".signin-form") as HTMLFormElement;
+const signupForm = document.querySelector(".signup-form") as HTMLFormElement;
+// const editAvatarForm = document.querySelector(
+//   ".edit-avatar"
+// ) as HTMLFormElement;
+const editProfileForm = document.querySelector(
+  ".edit-profile-form"
+) as HTMLFormElement;
+const changePasswordForm = document.querySelector(
+  ".change-password-form"
+) as HTMLFormElement;
+
+if (signinForm) {
+  const signinValidator = formValidator(signinForm);
+  signinValidator.enableValidation();
+}
+if (signupForm) {
+  const signupValidator = formValidator(signupForm);
+  signupValidator.enableValidation();
+}
+if (editProfileForm) {
+  const editProfileValidator = formValidator(editProfileForm);
+  editProfileValidator.enableValidation();
+}
+if (changePasswordForm) {
+  const changePasswordValidator = formValidator(changePasswordForm);
+  changePasswordValidator.enableValidation();
 }

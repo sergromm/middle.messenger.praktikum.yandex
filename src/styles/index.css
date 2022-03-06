@@ -292,6 +292,10 @@ body {
   transition: 0.3s;
 }
 
+.input:valid {
+  border-color: seagreen;
+}
+
 .input:not(:focus):valid {
   border-color: none;
 }
@@ -304,8 +308,8 @@ body {
   border-color: firebrick;
 }
 
-.input:focus:valid {
-  border-color: seagreen;
+.input-error {
+  border-color: firebrick;
 }
 
 .form-button {
@@ -321,6 +325,18 @@ body {
 
 .form-button:hover {
   background-color: #ffffff25;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.form-button_disabled {
+  background-color: transparent;
+  opacity: 0.7;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.form-button_disabled:hover {
+  cursor: not-allowed;
+  background-color: transparent;
 }
 
 .form-text {

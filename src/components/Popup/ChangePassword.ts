@@ -1,20 +1,16 @@
 import Block from "../../utils/templater/constructor/Block";
+import { formValidationPatterns } from "../../utils/templater/helpers";
 import Button from "../Button/Button";
+import EditInput from "../Input/EditInput";
 
 const changePasswordTemplate = /* template */ `
-<div class="popup edit-profile-popup">
-  <form class="form edit-profile-form">
+<div class="popup change-password-popup">
+  <form class="form change-password-form">
   {{closeButton}}
     <fieldset class="form-container">
       <legend class="form-title">Изменить пароль</legend>
-      <label class="input-title">
-        Старый пароль
-        <input class="input" value="123987123" type="password" name="oldPassword"/>
-      </label>
-      <label class="input-title">
-        Новый пароль
-        <input class="input" value="2222222" type="password" name="newPassword"/>
-      </label>
+      {{oldPasswordInput}}
+      {{newPassowrdInput}}
       <button class="form-button">Сохранить</button>
     </fieldset>
   </form>
@@ -67,7 +63,27 @@ const closeButton = new Button({
   },
 });
 
-const changePassword = new ChangePassword({ closeButton });
+const oldPasswordInput = new EditInput({
+  label: "Старый пароль",
+  name: "password",
+  type: "password",
+  value: "1234567890",
+  pattern: formValidationPatterns.password,
+});
+
+const newPassowrdInput = new EditInput({
+  label: "Новый пароль",
+  name: "password",
+  type: "password",
+  value: "",
+  pattern: formValidationPatterns.password,
+});
+
+const changePassword = new ChangePassword({
+  closeButton,
+  oldPasswordInput,
+  newPassowrdInput,
+});
 changePassword.setIsHidden();
 
 export default changePassword;

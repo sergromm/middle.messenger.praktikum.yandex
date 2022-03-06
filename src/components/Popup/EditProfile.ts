@@ -1,5 +1,7 @@
 import Block from "../../utils/templater/constructor/Block";
+import { formValidationPatterns } from "../../utils/templater/helpers";
 import Button from "../Button/Button";
+import EditInput from "../Input/EditInput";
 
 const editProfileTemplate = /* template */ `
 <div class="popup edit-profile-popup">
@@ -7,30 +9,12 @@ const editProfileTemplate = /* template */ `
   {{closeButton}}
     <fieldset class="form-container">
       <legend class="form-title">Редактировать профиль</legend>
-      <label class="input-title">
-        Имя
-        <input class="input" value="Дима" name="first_name"/>
-      </label>
-      <label class="input-title">
-        Фамилия
-        <input class="input" value="Дмитров" name="second_name"/>
-      </label>
-      <label class="input-title">
-        Отображаемое имя
-        <input class="input" value="Дима" name="display_name"/>
-      </label>
-      <label class="input-title">
-        Логин
-        <input class="input" value="demon369" name="login"/>
-      </label>
-      <label class="input-title">
-        E-mail
-        <input class="input" value="demon@ya.ru" name="email"/>
-      </label>
-      <label class="input-title">
-        Номер
-        <input class="input" value="+7(999)123-45-67" name="phone"/>
-      </label>
+      {{firstNameInput}}
+      {{displayNameInput}}
+      {{secondNameInput}}
+      {{loginInput}}
+      {{emailInput}}
+      {{phoneInput}}
       <button class="form-button">Сохранить</button>
     </fieldset>
   </form>
@@ -83,7 +67,64 @@ const closeButton = new Button({
   },
 });
 
-const editProfile = new EditProfile({ closeButton });
+const firstNameInput = new EditInput({
+  label: "Имя",
+  name: "first_name",
+  type: "text",
+  value: "Дима",
+  pattern: formValidationPatterns.first_name,
+});
+
+const displayNameInput = new EditInput({
+  label: "Отображаемое имя",
+  name: "display_name",
+  type: "text",
+  value: "Дима",
+  pattern: formValidationPatterns.first_name,
+});
+
+const secondNameInput = new EditInput({
+  label: "Фамилия",
+  name: "second_name",
+  type: "text",
+  value: "Дмитров",
+  pattern: formValidationPatterns.second_name,
+});
+
+const loginInput = new EditInput({
+  label: "Логин",
+  name: "login",
+  type: "text",
+  value: "demon369",
+  pattern: formValidationPatterns.login,
+});
+
+const emailInput = new EditInput({
+  label: "E-mail",
+  name: "email",
+  type: "email",
+  value: "demon@mail.com",
+  pattern: formValidationPatterns.email,
+});
+
+const phoneInput = new EditInput({
+  label: "Номер",
+  name: "phone",
+  type: "text",
+  value: "1234567890",
+  pattern: formValidationPatterns.phone,
+});
+
+const editProfile = new EditProfile({
+  closeButton,
+  firstNameInput,
+  displayNameInput,
+  secondNameInput,
+  loginInput,
+  emailInput,
+  phoneInput,
+});
+
 editProfile.setIsHidden();
 
 export default editProfile;

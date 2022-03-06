@@ -1,6 +1,9 @@
+/* eslint-disable no-useless-escape */
 import Block from "../utils/templater/constructor/Block";
 import Input from "../components/Input/Input";
-import setLocation from "../utils/templater/helpers";
+import setLocation, {
+  formValidationPatterns,
+} from "../utils/templater/helpers";
 
 const signupTemplate = `
 <form class="form signup-form">
@@ -33,34 +36,49 @@ const firstNameInput = new Input({
   className: ["input"],
   placeholder: "Имя",
   name: "first_name",
+  type: "text",
+  pattern: formValidationPatterns.first_name,
 });
+
 const secondNameInput = new Input({
   className: ["input"],
   placeholder: "Фамилия",
   name: "second_name",
+  type: "text",
+  pattern: formValidationPatterns.second_name,
 });
+
 const loginInput = new Input({
   className: ["input"],
   placeholder: "Логин",
   name: "login",
+  type: "text",
+  pattern: formValidationPatterns.login,
 });
+
 const emailInput = new Input({
   className: ["input"],
   placeholder: "E-mail",
   name: "email",
+  type: "email",
+  pattern: formValidationPatterns.email,
 });
+
 const phoneInput = new Input({
   className: ["input"],
   placeholder: "Номер",
   name: "phone",
+  type: "text",
+  pattern: formValidationPatterns.phone,
 });
+
 const passwordInput = new Input({
   className: ["input"],
   placeholder: "Пароль",
   name: "password",
+  type: "password",
+  pattern: formValidationPatterns.password,
 });
-
-passwordInput.setAttribute("minlength", "3");
 
 const handleSubmit = (event) => {
   event.preventDefault();
@@ -72,7 +90,7 @@ const handleSubmit = (event) => {
     console.dir(formData);
     setTimeout(() => {
       setLocation("/messages");
-    }, 3000);
+    }, 2000);
   }
 };
 

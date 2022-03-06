@@ -5,7 +5,8 @@ const inputTemplate = /* template */ `
   placeholder="{{placeholder}}" 
   class="{{className}}" 
   name="{{name}}"
-  type="{{type}}" 
+  type="{{type}}"
+  pattern="{{pattern}}" 
   required
 />`;
 
@@ -13,7 +14,7 @@ interface InputProps {
   placeholder: string;
   type: string;
   className: string;
-  pattern?: RegExp;
+  pattern?: string;
 }
 
 class Input extends Block<InputProps> {
