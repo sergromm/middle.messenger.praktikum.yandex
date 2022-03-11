@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/sergromm/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
+    "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
     "autoprefixer": "^10.4.2",
@@ -34,11 +35,8 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "handlebars": "^4.7.7",
     "nanoid": "^3.3.1",
     "postcss-url": "^10.1.3"
-  },
-  "engines": {
-    "npm": ">=7.0.0",
-    "node": ">=16.0.0"
   }
 }

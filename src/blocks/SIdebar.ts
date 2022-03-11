@@ -1,6 +1,6 @@
 import chatList from "../components/ChatList/ChatList";
 import controls from "../components/Controls/Controls";
-import Block from "../utils/templater/constructor/Block";
+import Block from "../utils/constructor/Block";
 
 const sidebarTemplate = `<aside class="sidebar">
     {{controls}}

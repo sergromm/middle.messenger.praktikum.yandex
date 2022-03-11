@@ -1,4 +1,4 @@
-import Block from "../utils/templater/constructor/Block";
+import Block from "../utils/constructor/Block";
 
 const fallbackTemplate = `<section class="fallback-container">
   <h1 class="fallback-number">{{title}}</h1>

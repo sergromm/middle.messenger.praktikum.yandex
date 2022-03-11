@@ -1,4 +1,4 @@
-import Block from "../../utils/templater/constructor/Block";
+import Block from "../../utils/constructor/Block";
 import { formValidationPatterns } from "../../utils/templater/helpers";
 import Button from "../Button/Button";
 import EditInput from "../Input/EditInput";

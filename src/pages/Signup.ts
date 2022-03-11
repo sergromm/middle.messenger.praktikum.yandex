@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import Block from "../utils/templater/constructor/Block";
+import Block from "../utils/constructor/Block";
 import Input from "../components/Input/Input";
 import setLocation, {
   formValidationPatterns,

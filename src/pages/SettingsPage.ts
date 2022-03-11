@@ -1,4 +1,4 @@
-import Block from "../utils/templater/constructor/Block";
+import Block from "../utils/constructor/Block";
 import settingsBackground from "../blocks/SettingsBackground";
 import settingsSidebar from "../blocks/SettingsSidebar";
 import changePassword from "../components/Popup/ChangePassword";

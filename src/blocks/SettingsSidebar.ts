@@ -1,4 +1,4 @@
-import Block from "../utils/templater/constructor/Block";
+import Block from "../utils/constructor/Block";
 import settings from "../components/Settings/Settings";
 import settingsControls from "../components/Controls/SettingsControls";
 

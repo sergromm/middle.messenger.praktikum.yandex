@@ -1,4 +1,4 @@
-import Block from "../utils/templater/constructor/Block";
+import Block from "../utils/constructor/Block";
 // !временная заглушка!
 // TODO: разобраться как ререндерить одинаковые компоненты на разных URL
 const settingsBackgroundTemplate = /* template */ `

@@ -1,15 +1,14 @@
-/* eslint-disable import/extensions */
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-param-reassign */
-// eslint-disable-next-line import/extensions
 import { nanoid } from "nanoid";
-import { compiler } from "../templater";
+import Handlebars from "handlebars";
 import EventBus from "./EventBus";
 
 interface meta {
   props?: object;
 }
 
-class Block<PropsT = any> {
+class Block {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -17,38 +16,38 @@ class Block<PropsT = any> {
     FLOW_RENDER: "flow:render",
   };
 
-  private _id: string | null;
+  static componentName = "Block";
+
+  public id: string;
 
   private _element: HTMLElement;
 
   private _meta: meta;
 
-  public props: PropsT;
+  public props: any;
 
   public eventBus: Function;
 
   public compiler: Function;
 
-  public children: object;
+  public children: Record<string, Block>;
 
-  constructor(propsAndChildren: any = { withEternalId: true }) {
+  constructor(propsAndChildren: any) {
     const { children, props } = this._getChildren(propsAndChildren);
     const eventBus = new EventBus();
     this._meta = { props };
     this.children = children;
-    if (propsAndChildren.withEternalId) {
-      this._id = nanoid();
-    }
-    this.props = this._makePropsProxy({ ...props, __id: this._id });
+    this.initChildren();
+    this.id = nanoid(8);
+    this.props = this._makePropsProxy({ ...props, __id: this.id });
     this.eventBus = () => eventBus;
-    this.compiler = compiler;
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _getChildren(propsAndChildren) {
-    const props = {};
-    const children = {};
+  _getChildren(propsAndChildren: any) {
+    const props: any = {};
+    const children: any = {};
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
         children[key] = value;
@@ -69,6 +68,8 @@ class Block<PropsT = any> {
   init() {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
+
+  protected initChildren() {}
 
   _componentDidMount() {
     this.componentDidMount();
@@ -115,8 +116,9 @@ class Block<PropsT = any> {
         return typeof value === "function" ? value.bind(target) : value;
       },
       set(target, prop, value) {
+        const oldProps = { ...target };
         target[prop] = value;
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
         return true;
       },
       deleteProperty() {
@@ -125,23 +127,23 @@ class Block<PropsT = any> {
     });
   }
 
-  compile(template, props) {
-    const propsAndStubs = { ...props };
+  compile(templateString: string, context: any) {
+    const propsAndStubs = { ...context };
     const fragment = this._createDocumentElement(
       "template"
     ) as HTMLTemplateElement;
     Object.entries(this.children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="id-${child._id}"></div>`;
+      propsAndStubs[key] = `<div data-id="id-${child.id}"></div>`;
     });
 
-    const htmlString = compiler(template.trim(), propsAndStubs);
+    const template = Handlebars.compile(templateString);
+
+    const htmlString = template({ ...propsAndStubs, children: this.children });
 
     fragment.innerHTML = htmlString;
 
     Object.values(this.children).forEach((child) => {
-      const stub = fragment.content.querySelector(
-        `[data-id="id-${child._id}"]`
-      );
+      const stub = fragment.content.querySelector(`[data-id="id-${child.id}"]`);
 
       if (!stub) {
         return;
@@ -154,20 +156,19 @@ class Block<PropsT = any> {
   }
 
   _render() {
-    const fragment = this.render();
-    if (this._element) {
-      this._removeEvents();
-    }
+    const templateString = this.render();
+    const fragment = this.compile(templateString, { ...this.props });
     const newElement = fragment.firstChild as HTMLElement;
     if (this._element) {
+      this._removeEvents();
       this._element.replaceWith(newElement);
     }
     this._element = newElement;
     this._addEvents();
   }
 
-  render(): DocumentFragment {
-    return new DocumentFragment();
+  render(): string {
+    return "";
   }
 
   getContent() {
@@ -204,8 +205,8 @@ class Block<PropsT = any> {
   _createDocumentElement(tagName) {
     const element = document.createElement(tagName);
 
-    if (this._id) {
-      element.setAttribute("data-id", this._id);
+    if (this.id) {
+      element.setAttribute("data-id", this.id);
     }
 
     return element;

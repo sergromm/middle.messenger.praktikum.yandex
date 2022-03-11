@@ -1,4 +1,4 @@
-import Block from "../utils/templater/constructor/Block";
+import Block from "../utils/constructor/Block";
 import ChatFeed from "../blocks/ChatFeed";
 import sidebar from "../blocks/Sidebar";
 import chatHeader from "../components/ChatHeader/ChatHeader";

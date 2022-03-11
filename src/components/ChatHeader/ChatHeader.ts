@@ -1,4 +1,4 @@
-import Block from "../../utils/templater/constructor/Block";
+import Block from "../../utils/constructor/Block";
 
 const chatHeaderTemplate = `<header class="chat-header">
 <a href="/500" class="chat-title">{{name}}</a>

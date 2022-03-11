@@ -1,4 +1,4 @@
-import Block from "../../utils/templater/constructor/Block";
+import Block from "../../utils/constructor/Block";
 import changePassword from "../Popup/ChangePassword";
 import Button from "../Button/Button";
 import editProfile from "../Popup/EditProfile";

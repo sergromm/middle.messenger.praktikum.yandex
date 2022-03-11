@@ -1,4 +1,4 @@
-import Block from "../../utils/templater/constructor/Block";
+import Block from "../../utils/constructor/Block";
 
 const addButtonTemplate = `<button class="add-chat">Добавить чат</button>`;
 

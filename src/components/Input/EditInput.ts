@@ -1,4 +1,4 @@
-import Block from "../../utils/templater/constructor/Block";
+import Block from "../../utils/constructor/Block";
 
 const editInputTemplate = /* template */ `
 <label class="input-title">

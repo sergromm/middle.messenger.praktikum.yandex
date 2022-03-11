@@ -1,4 +1,4 @@
-import Block from "../../utils/templater/constructor/Block";
+import Block from "../../utils/constructor/Block";
 import addButton from "../AddButton/AddButton";
 
 const chatItemTemplate = /* template */ `

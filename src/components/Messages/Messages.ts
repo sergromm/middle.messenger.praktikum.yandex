@@ -1,4 +1,4 @@
-import Block from "../../utils/templater/constructor/Block";
+import Block from "../../utils/constructor/Block";
 
 // TODO разобраться почему шаблонизатор перестал генерировать списки сообщений
 const messageTemplate = `<li class="message">Привет</li>`;

@@ -1,4 +1,4 @@
-import Block from "../utils/templater/constructor/Block";
+import Block from "../utils/constructor/Block";
 
 const chatFeedTemplate = `<section class="chat-feed">
   {{chatHeader}}

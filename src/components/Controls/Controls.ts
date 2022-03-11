@@ -1,4 +1,4 @@
-import Block from "../../utils/templater/constructor/Block";
+import Block from "../../utils/constructor/Block";
 import Button from "../Button/Button";
 
 const controlsTemplate = /* template */ `

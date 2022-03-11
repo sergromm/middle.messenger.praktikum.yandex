@@ -17,6 +17,7 @@
     "class-methods-use-this": ["off"],
     "comma-dangle": "off",
     "object-curly-newline": "off",
+    "no-param-reassign": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
