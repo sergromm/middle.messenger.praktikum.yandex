@@ -1,30 +1,42 @@
 import Block from "../../utils/constructor/Block";
 
-const inputTemplate = /* template */ `
-<input 
-  placeholder="{{placeholder}}" 
-  class="{{className}}" 
-  name="{{name}}"
-  type="{{type}}"
-  pattern="{{pattern}}" 
-  required
-/>`;
-
 interface InputProps {
   placeholder: string;
   type: string;
   className: string;
   pattern?: string;
+  required?: string;
+  onFocus?: () => {};
+  onBlur?: () => {};
+  onInput?: () => {};
 }
 
-class Input extends Block<InputProps> {
+export default class Input extends Block {
+  static componentName = "Input";
+
+  constructor(props: InputProps) {
+    super({
+      ...props,
+      events: { focus: props.onFocus, blur: props.onBlur, input: props.onInput },
+    });
+
+    // this.setState({
+    //   className: props.className,
+    // });
+  }
+
   render() {
-    return this.compile(inputTemplate, { ...this.props });
-  }
-
-  setAttribute(name: string, value: string) {
-    this.element.setAttribute(name, value);
+    return /* template */ `
+      <input 
+        placeholder="{{placeholder}}" 
+        class="{{className}}" 
+        name="{{name}}"
+        type="{{type}}"
+        value="{{value}}"
+        pattern="{{pattern}}"
+        minlength="{{minlength}}"
+        maxlength="{{maxlength}}"
+        ${this.props.required ? "required" : ""}
+      />`;
   }
 }
-
-export default Input;

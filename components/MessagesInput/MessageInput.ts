@@ -1,0 +1,9 @@
+import Block from "../../utils/constructor/Block";
+
+const messageInputTemplate = `<input class="message-input" placeholder="Введите сообщение" type="text" name="message"/>`;
+
+class MessageInput extends Block {
+  render() {
+    return this.compile(messageInputTemplate, { ...this.props });
+  }
+}

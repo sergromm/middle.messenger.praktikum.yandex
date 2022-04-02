@@ -1,22 +1,27 @@
-import ButtonElement from "./components/element/element";
+/* eslint-disable import/no-unresolved */
+import Block from "./utils/constructor/Block";
+import ButtonElement from "./components/FormButton/FormButton";
+import Input from "./components/Input/Input";
 import LoginPage from "./pages/Login";
 import "./styles/index.css";
 import registerComponent from "./utils/constructor/registerComponent";
 
-function renderDOM(query, block) {
+function renderDOM(query: string, block: Block) {
   const target = document.querySelector(query);
-  target.appendChild(block.getContent());
+  target?.appendChild(block.getContent());
+
   return target;
 }
 
-function renderCurry(target) {
-  return (block) => renderDOM(target, block);
+function renderCurry(target: string) {
+  return (block: Block) => renderDOM(target, block);
 }
 
 const render = renderCurry("#root");
 
 document.addEventListener("DOMContentLoaded", () => {
   registerComponent(ButtonElement);
+  registerComponent(Input);
   const loginPage = new LoginPage({});
   render(loginPage);
 });

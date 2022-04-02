@@ -13,6 +13,8 @@
   "plugins": ["@typescript-eslint", "import"],
   "rules": {
     "quotes": ["off"],
+    "no-undef": "off",
+    "max-len": ["error", { "code": 100 }],
     "no-underscore-dangle": ["off"],
     "class-methods-use-this": ["off"],
     "comma-dangle": "off",

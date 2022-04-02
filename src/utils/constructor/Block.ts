@@ -1,14 +1,10 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
-/* eslint-disable no-param-reassign */
 import { nanoid } from "nanoid";
 import Handlebars from "handlebars";
 import EventBus from "./EventBus";
 
-interface meta {
-  props?: object;
-}
-
-class Block {
+class Block<P = any> {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -20,26 +16,29 @@ class Block {
 
   public id: string;
 
-  private _element: HTMLElement;
+  protected _element: HTMLElement;
 
-  private _meta: meta;
+  protected props: P;
 
-  public props: any;
+  protected state: any = {};
+
+  protected refs: { [key: string]: HTMLElement } = {};
 
   public eventBus: Function;
 
   public compiler: Function;
 
-  public children: Record<string, Block>;
+  protected children: Record<string, Block>;
 
-  constructor(propsAndChildren: any) {
+  public constructor(propsAndChildren: any) {
     const { children, props } = this._getChildren(propsAndChildren);
     const eventBus = new EventBus();
-    this._meta = { props };
     this.children = children;
+    this.getStateFromProps(props);
     this.initChildren();
     this.id = nanoid(8);
     this.props = this._makePropsProxy({ ...props, __id: this.id });
+    this.state = this._makePropsProxy(this.state);
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
@@ -58,7 +57,7 @@ class Block {
     return { props, children };
   }
 
-  _registerEvents(eventBus) {
+  _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -78,37 +77,47 @@ class Block {
     });
   }
 
-  // eslint-disable-next-line no-unused-vars
-  componentDidMount(oldProps = {}) {}
+  componentDidMount(_oldProps = {}) {}
 
   dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  _componentDidUpdate(oldProps, newProps) {
+  _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (response) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
-  componentDidUpdate(oldProps, newProps) {
+  componentDidUpdate(_oldProps: P, _newProps: P) {
     return true;
   }
 
-  setProps = (nextProps) => {
+  protected getStateFromProps(_props: any): void {
+    this.state = {};
+  }
+
+  setProps = (nextProps: any) => {
     if (!nextProps) {
       return;
     }
     Object.assign(this.props, nextProps);
   };
 
+  setState = (nextState: any) => {
+    if (!nextState) {
+      return;
+    }
+    Object.assign(this.state, nextState);
+  };
+
   get element() {
     return this._element;
   }
 
-  _makePropsProxy(props) {
+  // eslint-disable-next-line arrow-body-style
+  _makePropsProxy(props: any): any {
     const self = this;
     return new Proxy(props, {
       get(target, prop) {
@@ -128,21 +137,18 @@ class Block {
   }
 
   compile(templateString: string, context: any) {
-    const propsAndStubs = { ...context };
-    const fragment = this._createDocumentElement(
-      "template"
-    ) as HTMLTemplateElement;
-    Object.entries(this.children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="id-${child.id}"></div>`;
-    });
+    const fragment = this._createDocumentElement("template") as HTMLTemplateElement;
 
     const template = Handlebars.compile(templateString);
-
-    const htmlString = template({ ...propsAndStubs, children: this.children });
+    const htmlString = template({
+      ...context,
+      children: this.children,
+      refs: this.refs,
+    });
 
     fragment.innerHTML = htmlString;
 
-    Object.values(this.children).forEach((child) => {
+    Object.values(this.children).forEach((child: Block) => {
       const stub = fragment.content.querySelector(`[data-id="id-${child.id}"]`);
 
       if (!stub) {
@@ -157,8 +163,12 @@ class Block {
 
   _render() {
     const templateString = this.render();
-    const fragment = this.compile(templateString, { ...this.props });
-    const newElement = fragment.firstChild as HTMLElement;
+
+    const fragment = this.compile(templateString, {
+      ...this.props,
+      ...this.state,
+    });
+    const newElement = fragment.firstElementChild as HTMLElement;
     if (this._element) {
       this._removeEvents();
       this._element.replaceWith(newElement);
@@ -179,6 +189,10 @@ class Block {
     return this.props;
   }
 
+  getState() {
+    return this.state;
+  }
+
   _addEvents() {
     const { events }: Record<string, () => void> = this.props as any;
 
@@ -197,12 +211,13 @@ class Block {
     if (!events) {
       return;
     }
+
     Object.entries(events).forEach(([event, listener]) => {
       this._element!.removeEventListener(event, listener);
     });
   }
 
-  _createDocumentElement(tagName) {
+  _createDocumentElement(tagName: string) {
     const element = document.createElement(tagName);
 
     if (this.id) {
