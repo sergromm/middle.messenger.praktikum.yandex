@@ -1,6 +1,10 @@
 import Block from "./constructor/Block";
 import validateInput from "./forms/validation/validation";
 
+function setLocation(path: string) {
+  window.location.pathname = path;
+}
+
 const handleFormSubmit = (formState: any, e: Event) => {
   e.preventDefault();
 
@@ -17,12 +21,11 @@ const handleFormSubmit = (formState: any, e: Event) => {
 
   if (isFormValid) {
     console.log({ ...formState.values });
+    setTimeout(() => {
+      setLocation("/messages");
+    }, 1500);
   }
 };
-
-function setLocation(path: string) {
-  window.location.pathname = path;
-}
 
 function renderDOM(query: string, block: Block) {
   const target = document.querySelector(query);
