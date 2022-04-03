@@ -6,7 +6,7 @@ const METHODS = {
   DELETE: "DELETE",
 };
 
-function queryStringify(data) {
+function queryStringify(data: Object) {
   const query = Object.entries(data).map(([key, value]) => `${key}=${value}`);
   return query ? `?  ${query.join("&")}` : "";
 }
@@ -30,20 +30,20 @@ class HTTPTransport {
     return this.request(url + dataQuery, { ...options, method: METHODS.GET });
   }
 
-  post(url, options: Options = { headers: "", data: {}, timeout: 0 }) {
+  post(url: string, options: Options = { headers: "", data: {}, timeout: 0 }) {
     return this.request(url, { ...options, method: METHODS.POST });
   }
 
-  put(url, options: Options = { headers: "", data: {}, timeout: 0 }) {
+  put(url: string, options: Options = { headers: "", data: {}, timeout: 0 }) {
     return this.request(url, { ...options, method: METHODS.PUT });
   }
 
-  delete(url, options: Options = { headers: "", data: {}, timeout: 0 }) {
+  delete(url: string, options: Options = { headers: "", data: {}, timeout: 0 }) {
     return this.request(url, { ...options, method: METHODS.DELETE });
   }
 
   request(
-    url,
+    url: string,
     options: RequestOptions = {
       data: {},
       headers: "",
@@ -67,7 +67,7 @@ class HTTPTransport {
         reject(new Error("Время на запрос вышло"));
       }, timeout || 2000);
 
-      xhr.onload = function () {
+      xhr.onload = () => {
         resolve(xhr);
       };
 
