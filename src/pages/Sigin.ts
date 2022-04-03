@@ -3,8 +3,8 @@ import { formValidationPatterns } from "../utils/forms/helpers/constants";
 import validateInput from "../utils/forms/validation/validation";
 import { handleFormSubmit } from "../utils/utils";
 
-export default class LoginPage extends Block {
-  static componentName = "LoginPage";
+export default class SigninPage extends Block {
+  static componentName = "SigninPage";
 
   protected getStateFromProps() {
     this.state = {
@@ -14,7 +14,7 @@ export default class LoginPage extends Block {
       },
       singInButtonText: "Войти",
       validateInput: (e: FocusEvent) => validateInput(e.type, e.target as HTMLInputElement),
-      handleLogin: (e: SubmitEvent) => handleFormSubmit(this.state, e),
+      handleSubmit: (e: SubmitEvent) => handleFormSubmit(this.state, e),
     };
   }
 
@@ -36,7 +36,7 @@ export default class LoginPage extends Block {
             value="${values.login}"
             pattern="${formValidationPatterns.login}" 
             minlength="3"
-            maxlength="30"
+            maxlength="20"
             onFocus=validateInput
             onBlur=validateInput
             onInput=validateInput
@@ -64,7 +64,7 @@ export default class LoginPage extends Block {
           type="submit" 
           className="form-button" 
           text=singInButtonText 
-          onClick=handleLogin
+          onClick=handleSubmit
         }}}
         <p class="form-text">
           Нет аккаунта?

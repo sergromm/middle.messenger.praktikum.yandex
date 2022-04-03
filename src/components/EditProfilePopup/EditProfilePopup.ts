@@ -17,7 +17,7 @@ export default class EditProfilePopup extends Block {
         phone: "1234567890",
       },
       validateInput: (e: FocusEvent) => validateInput(e.type, e.target as HTMLInputElement),
-      handleLogin: (e: SubmitEvent) => handleFormSubmit(this.state, e),
+      handleSubmit: (e: SubmitEvent) => handleFormSubmit(this.state, e),
     };
   }
 
@@ -44,7 +44,7 @@ export default class EditProfilePopup extends Block {
             onClick=handlePopup
           }}}
           <fieldset class="form-container">
-            <legend class="form-title">Изменить аватар</legend>
+            <legend class="form-title">Редактировать профиль</legend>
             <label class="input-title">
               Имя
               <div class="input-container">
@@ -135,6 +135,8 @@ export default class EditProfilePopup extends Block {
                   type="text"
                   value="${values.phone}"
                   pattern="${formValidationPatterns.phone}"
+                  minlength="8"
+                  maxlength="40"
                   onBlur=validateInput
                   onInput=validateInput
                   required=true
@@ -144,7 +146,7 @@ export default class EditProfilePopup extends Block {
             {{{Button 
               className="form-button" 
               text="Сохранить"
-              onClick=handleLogin
+              onClick=handleSubmit
             }}}
           </fieldset>
         </form>

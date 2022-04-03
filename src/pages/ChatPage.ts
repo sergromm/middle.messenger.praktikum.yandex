@@ -7,18 +7,18 @@ type Message = {
 
 type Messages = Array<Message>;
 
-const messagesMock: Messages = [
-  {
-    text: "Привет",
-  },
-];
-
 type ChatData = {
   name: string;
   lastMessage: string;
 };
 
 type ChatItems = Array<ChatData>;
+
+const messagesMock: Messages = [
+  {
+    text: "Привет",
+  },
+];
 
 const chatsMock: ChatItems = [
   {

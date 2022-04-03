@@ -13,7 +13,7 @@ export default class ChangePasswordPopup extends Block {
         new_password: "",
       },
       validateInput: (e: FocusEvent) => validateInput(e.type, e.target as HTMLInputElement),
-      handleLogin: (e: SubmitEvent) => handleFormSubmit(this.state, e),
+      handleSubmit: (e: SubmitEvent) => handleFormSubmit(this.state, e),
     };
   }
 
@@ -32,7 +32,7 @@ export default class ChangePasswordPopup extends Block {
             
           }}}
           <fieldset class="form-container">
-            <legend class="form-title">Изменить аватар</legend>
+            <legend class="form-title">Изменить пароль</legend>
             <label class="input-title">
               Старый пароль
               <div class="input-container">
@@ -70,7 +70,7 @@ export default class ChangePasswordPopup extends Block {
             {{{Button 
               className="form-button" 
               text="Сохранить"
-              onClick=handleLogin
+              onClick=handleSubmit
             }}}
           </fieldset>
         </form>
