@@ -2,7 +2,7 @@
 
 **О проекте**
 
-* [Ссылка](https://github.com/sergromm/middle.messenger.praktikum.yandex/pull/2) на пул реквест второго спринта.  
+* [Ссылка](https://github.com/sergromm/middle.messenger.praktikum.yandex/pull/3) на пул реквест второго спринта.  
 
 * [Ссылка](https://www.figma.com/file/eeaPkhaTqieli5L4IRn3w1/praktikum-chat-ui?node-id=15%3A323) на макет в Figma.  
 
