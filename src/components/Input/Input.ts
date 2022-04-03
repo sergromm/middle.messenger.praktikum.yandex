@@ -9,6 +9,7 @@ interface InputProps {
   onFocus?: () => {};
   onBlur?: () => {};
   onInput?: () => {};
+  onKeydown?: () => {};
 }
 
 export default class Input extends Block {
@@ -17,12 +18,13 @@ export default class Input extends Block {
   constructor(props: InputProps) {
     super({
       ...props,
-      events: { focus: props.onFocus, blur: props.onBlur, input: props.onInput },
+      events: {
+        focus: props.onFocus,
+        blur: props.onBlur,
+        input: props.onInput,
+        keydown: props.onKeydown,
+      },
     });
-
-    // this.setState({
-    //   className: props.className,
-    // });
   }
 
   render() {

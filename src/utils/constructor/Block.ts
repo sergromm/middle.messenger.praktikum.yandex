@@ -30,7 +30,7 @@ class Block<P = any> {
 
   protected children: Record<string, Block>;
 
-  public constructor(propsAndChildren: any) {
+  public constructor(propsAndChildren: any = {}) {
     const { children, props } = this._getChildren(propsAndChildren);
     const eventBus = new EventBus();
     this.children = children;

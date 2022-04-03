@@ -60,7 +60,7 @@ export default class LoginPage extends Block {
             required=true
           }}}
         </div>
-        {{{ButtonElement 
+        {{{Button 
           type="submit" 
           className="form-button" 
           text=singInButtonText 

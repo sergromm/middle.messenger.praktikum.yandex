@@ -1,3 +1,4 @@
+import Block from "./constructor/Block";
 import validateInput from "./forms/validation/validation";
 
 const handleFormSubmit = (formState: any, e: Event) => {
@@ -23,4 +24,15 @@ function setLocation(path: string) {
   window.location.pathname = path;
 }
 
-export { handleFormSubmit, setLocation };
+function renderDOM(query: string, block: Block) {
+  const target = document.querySelector(query);
+  target?.appendChild(block.getContent());
+
+  return target;
+}
+
+function renderCurry(target: string) {
+  return (block: Block) => renderDOM(target, block);
+}
+
+export { handleFormSubmit, setLocation, renderCurry };

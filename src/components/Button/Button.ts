@@ -7,10 +7,11 @@ interface ButtonProps {
   events?: {
     click: () => void;
   };
+  name?: string;
 }
 
-export default class ButtonElement extends Block {
-  static componentName = "ButtonElement";
+export default class Button extends Block {
+  static componentName = "Button";
 
   constructor(props: ButtonProps) {
     super({ ...props, events: { click: props?.onClick } });
@@ -18,6 +19,6 @@ export default class ButtonElement extends Block {
 
   render() {
     return /* template */ `
-      <button class="{{className}}" type="{{type}}">{{text}}</button>`;
+      <button class="{{className}}" type="{{type}}" name="{{name}}">{{text}}</button>`;
   }
 }

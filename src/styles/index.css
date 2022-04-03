@@ -97,12 +97,12 @@ body {
   opacity: 1;
 }
 
-.menu-button {
+.menu-icon {
   background: url("../assets/icons/icons8-back.png") 50% 50% no-repeat;
   background-size: 100%;
 }
 
-.settings {
+.settings-icon {
   background: url("../assets/icons/icons8-settings.svg") 50% 50% no-repeat;
   background-size: 100%;
 }
@@ -214,6 +214,28 @@ body {
   background-size: 100%;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #27292e;
+  border-radius: 15px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #387affa4;
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #387aff81;
+}
+
 .messages {
   display: flex;
   flex-direction: column;
@@ -318,6 +340,7 @@ body {
 .input-tooltip {
   visibility: hidden;
   opacity: 0;
+  color: white;
   position: absolute;
   font-size: 12px;
   top: 2px;
@@ -345,12 +368,6 @@ body {
   border-radius: 15%;
   background-color: firebrick;
   transform: rotate(45deg);
-}
-
-/* stylelint-disable-next-line selector-class-pattern */
-.visible {
-  visibility: visible;
-  opacity: 1;
 }
 
 .input:focus .input-tooltip {
@@ -407,7 +424,7 @@ body {
 /* popup styles */
 
 .popup {
-  z-index: 9999;
+  z-index: 9998;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -417,6 +434,8 @@ body {
   height: 100vh;
   background-color: #161819d8;
   transition: 0.3s;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .popup-close {
@@ -465,4 +484,9 @@ body {
 
 .fallback-link {
   text-decoration: none;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
 }
